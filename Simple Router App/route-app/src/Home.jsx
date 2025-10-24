@@ -1,10 +1,12 @@
 import { useEffect, useState, createContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 
 export const dataContext = createContext();
 
 function Home(){
+
+    const navigate = useNavigate();
 
     const [posts,setPosts]= useState(null);
 
@@ -35,18 +37,18 @@ function Home(){
     return(
         <>
         <div className="container">
-            <Link to ='/login'>Login</Link>
+            {/* <Link to ='/login'>Login</Link> */}
             <dataContext.Provider value={data}>
-                <Login />
+                {/* <Login /> */}
             </dataContext.Provider>
             
             <div className="row justify-content-center m-3">
                 {posts && posts.map((post)=>{
                     return(
-                        <div key={post.id} className="card m-3" style={{width :'18rem'}}>
+                        <div key={post.id} className="card m-3" style={{width :'18rem'}} onClick={()=>{navigate('/post/'+post.id)}}>
                             <div className="card-body">
                                 <h5 className="card-title">{post.title}</h5>
-                                <p className="card-text">{post.body}</p>
+                                {/* <p className="card-text">{post.body}</p> */}
                             </div>
                         </div>
                     )
